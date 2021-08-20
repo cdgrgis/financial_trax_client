@@ -1,5 +1,5 @@
 {
-  "homepage": "http://anything.github.io/anything",
+  "homepage": "http://<git-name>.github.io/<repo-name>",
   "name": "react-auth-template",
   "version": "0.1.0",
   "private": true,
