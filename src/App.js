@@ -20,22 +20,22 @@ class App extends Component {
     }
   }
 
-  setUser = (user) => this.setState({ user })
+  setUser = user => this.setState({ user })
 
   clearUser = () => this.setState({ user: null })
 
-  deleteAlert = (id) => {
-    this.setState((state) => {
-      return { msgAlerts: state.msgAlerts.filter((msg) => msg.id !== id) }
-    })
-  }
-
   msgAlert = ({ heading, message, variant }) => {
     const id = uuid()
-    this.setState((state) => {
+    this.setState(state => {
       return {
         msgAlerts: [...state.msgAlerts, { heading, message, variant, id }]
       }
+    })
+  }
+
+  deleteAlert = id => {
+    this.setState(state => {
+      return { msgAlerts: state.msgAlerts.filter(msg => msg.id !== id) }
     })
   }
 
@@ -44,8 +44,8 @@ class App extends Component {
 
     return (
       <Fragment>
-	      <Header user={user} />
-	      {msgAlerts.map((msgAlert) => (
+        <Header user={user} />
+        {msgAlerts.map(msgAlert => (
           <AutoDismissAlert
             key={msgAlert.id}
             heading={msgAlert.heading}
@@ -55,8 +55,8 @@ class App extends Component {
             deleteAlert={this.deleteAlert}
           />
         ))}
-	      <main className='container'>
-	        <Route
+        <main className='container'>
+          <Route
             path='/sign-up'
             render={() => (
               <SignUp msgAlert={this.msgAlert} setUser={this.setUser} />
