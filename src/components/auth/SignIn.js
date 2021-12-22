@@ -68,7 +68,7 @@ const SignIn = ({ msgAlert, setUser }) => {
               }
             />
           </Form.Group>
-          <Button variant='primary' type='submit'>Submit</Button>
+          <Button className='mt-2' variant='primary' type='submit'>Submit</Button>
         </Form>
       </div>
     </div>
