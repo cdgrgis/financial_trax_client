@@ -14,7 +14,7 @@ const ChangePassword = ({ msgAlert, history, user }) => {
   const onChangePassword = (event) => {
     event.preventDefault()
 
-    changePassword({ oldPassword, newPassword }, user)
+    changePassword(oldPassword, newPassword, user)
       .then(() =>
         msgAlert({
           heading: 'Change Password Success',

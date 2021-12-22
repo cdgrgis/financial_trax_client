@@ -14,8 +14,7 @@ const SignIn = ({ msgAlert, history, setUser }) => {
   const onSignIn = (event) => {
     event.preventDefault()
 
-    // TODO: Maybe use params instead of object
-    signIn({ email, password })
+    signIn(email, password)
       .then((res) => setUser(res.data.user))
       .then(() =>
         msgAlert({
