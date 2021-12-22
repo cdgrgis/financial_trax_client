@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { withRouter } from 'react-router-dom'
+import { Navigate } from 'react-router-dom'
 
 import { changePassword } from '../../api/auth'
 import { changePasswordSuccess, changePasswordFailure } from '../AutoDismissAlert/messages'
@@ -7,9 +7,10 @@ import { changePasswordSuccess, changePasswordFailure } from '../AutoDismissAler
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
 
-const ChangePassword = ({ msgAlert, history, user }) => {
+const ChangePassword = ({ msgAlert, user }) => {
   const [oldPassword, setOldPassword] = useState('')
   const [newPassword, setNewPassword] = useState('')
+  const [shouldNavigate, setShouldNavigate] = useState(false)
 
   const onChangePassword = (event) => {
     event.preventDefault()
@@ -22,7 +23,7 @@ const ChangePassword = ({ msgAlert, history, user }) => {
           variant: 'success'
         })
       )
-      .then(() => history.push('/'))
+      .then(() => setShouldNavigate(true))
       .catch((error) => {
         setOldPassword('')
         setNewPassword('')
@@ -32,6 +33,10 @@ const ChangePassword = ({ msgAlert, history, user }) => {
           variant: 'danger'
         })
       })
+  }
+
+  if (!user || shouldNavigate) {
+    return <Navigate to='/' />
   }
 
   return (
@@ -69,4 +74,4 @@ const ChangePassword = ({ msgAlert, history, user }) => {
   )
 }
 
-export default withRouter(ChangePassword)
+export default ChangePassword

@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { withRouter } from 'react-router-dom'
+import { Navigate } from 'react-router-dom'
 
 import { signIn } from '../../api/auth'
 import { signInSuccess, signInFailure } from '../AutoDismissAlert/messages'
@@ -7,9 +7,10 @@ import { signInSuccess, signInFailure } from '../AutoDismissAlert/messages'
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
 
-const SignIn = ({ msgAlert, history, setUser }) => {
+const SignIn = ({ msgAlert, setUser }) => {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
+  const [shouldNavigate, setShouldNavigate] = useState(false)
 
   const onSignIn = (event) => {
     event.preventDefault()
@@ -23,7 +24,7 @@ const SignIn = ({ msgAlert, history, setUser }) => {
           variant: 'success'
         })
       )
-      .then(() => history.push('/'))
+      .then(() => setShouldNavigate(true))
       .catch((error) => {
         setEmail('')
         setPassword('')
@@ -33,6 +34,10 @@ const SignIn = ({ msgAlert, history, setUser }) => {
           variant: 'danger'
         })
       })
+  }
+
+  if (shouldNavigate) {
+    return <Navigate to='/' />
   }
 
   return (
@@ -70,4 +75,4 @@ const SignIn = ({ msgAlert, history, setUser }) => {
   )
 }
 
-export default withRouter(SignIn)
+export default SignIn

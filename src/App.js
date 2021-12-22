@@ -1,9 +1,8 @@
 /* eslint-disable no-tabs */
 import React, { useState } from 'react'
-import { Route } from 'react-router-dom'
+import { Route, Routes } from 'react-router-dom'
 import { v4 as uuid } from 'uuid'
 
-import AuthenticatedRoute from './components/AuthenticatedRoute/AuthenticatedRoute'
 import AutoDismissAlert from './components/AutoDismissAlert/AutoDismissAlert'
 import Header from './components/Header/Header'
 import SignUp from './components/auth/SignUp'
@@ -40,36 +39,25 @@ const App = () => {
         />
       ))}
       <main className='container'>
-        <Route
-          path='/sign-up'
-          render={() => (
-            <SignUp msgAlert={msgAlert} setUser={setUser} />
-          )}
-        />
-        <Route
-          path='/sign-in'
-          render={() => (
-            <SignIn msgAlert={msgAlert} setUser={setUser} />
-          )}
-        />
-        <AuthenticatedRoute
-          user={user}
-          path='/sign-out'
-          render={() => (
-            <SignOut
-              msgAlert={msgAlert}
-              clearUser={clearUser}
-              user={user}
-            />
-          )}
-        />
-        <AuthenticatedRoute
-          user={user}
-          path='/change-password'
-          render={() => (
-            <ChangePassword msgAlert={msgAlert} user={user} />
-          )}
-        />
+        <Routes>
+          <Route
+            path='/sign-up'
+            element={<SignUp msgAlert={msgAlert} setUser={setUser} /> }
+          />
+          <Route
+            path='/sign-in'
+            element={<SignIn msgAlert={msgAlert} setUser={setUser} /> }
+          />
+          <Route
+            path='/sign-out'
+            element={<SignOut msgAlert={msgAlert} clearUser={clearUser} user={user} /> }
+          />
+          <Route
+            path='/change-password'
+            element={<ChangePassword msgAlert={msgAlert} user={user} /> }
+          />
+
+        </Routes>
       </main>
     </>
   )

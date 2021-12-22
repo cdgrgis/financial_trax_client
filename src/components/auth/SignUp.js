@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { withRouter } from 'react-router-dom'
+import { Navigate } from 'react-router-dom'
 
 import { signUp, signIn } from '../../api/auth'
 import { signUpSuccess, signUpFailure } from '../AutoDismissAlert/messages'
@@ -7,10 +7,11 @@ import { signUpSuccess, signUpFailure } from '../AutoDismissAlert/messages'
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
 
-const SignUp = ({ msgAlert, history, setUser }) => {
+const SignUp = ({ msgAlert, setUser }) => {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [passwordConfirmation, setPasswordConfirmation] = useState('')
+  const [shouldNavigate, setShouldNavigate] = useState(false)
 
   const onSignUp = (event) => {
     event.preventDefault()
@@ -25,7 +26,7 @@ const SignUp = ({ msgAlert, history, setUser }) => {
           variant: 'success'
         })
       )
-      .then(() => history.push('/'))
+      .then(() => setShouldNavigate(true))
       .catch((error) => {
         setEmail('')
         setPassword('')
@@ -36,6 +37,10 @@ const SignUp = ({ msgAlert, history, setUser }) => {
           variant: 'danger'
         })
       })
+  }
+
+  if (shouldNavigate) {
+    return <Navigate to='/' />
   }
 
   return (
@@ -83,4 +88,4 @@ const SignUp = ({ msgAlert, history, setUser }) => {
   )
 }
 
-export default withRouter(SignUp)
+export default SignUp
