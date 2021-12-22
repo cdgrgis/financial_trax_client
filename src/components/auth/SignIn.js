@@ -12,28 +12,28 @@ const SignIn = ({ msgAlert, setUser }) => {
   const [password, setPassword] = useState('')
   const [shouldNavigate, setShouldNavigate] = useState(false)
 
-  const onSignIn = (event) => {
+  const onSignIn = async (event) => {
     event.preventDefault()
 
-    signIn(email, password)
-      .then((res) => setUser(res.data.user))
-      .then(() =>
-        msgAlert({
-          heading: 'Sign In Success',
-          message: signInSuccess,
-          variant: 'success'
-        })
-      )
-      .then(() => setShouldNavigate(true))
-      .catch((error) => {
-        setEmail('')
-        setPassword('')
-        msgAlert({
-          heading: 'Sign In Failed with error: ' + error.message,
-          message: signInFailure,
-          variant: 'danger'
-        })
+    try {
+      const res = await signIn(email, password)
+      setUser(res.data.user)
+
+      msgAlert({
+        heading: 'Sign In Success',
+        message: signInSuccess,
+        variant: 'success'
       })
+      setShouldNavigate(true)
+    } catch (error) {
+      setEmail('')
+      setPassword('')
+      msgAlert({
+        heading: 'Sign In Failed with error: ' + error.message,
+        message: signInFailure,
+        variant: 'danger'
+      })
+    }
   }
 
   if (shouldNavigate) {

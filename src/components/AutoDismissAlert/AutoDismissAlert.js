@@ -14,7 +14,7 @@ const AutoDismissAlert = ({ variant, heading, message, deleteAlert, id }) => {
     return () => {
       clearTimeout(timeoutId)
     }
-  })
+  }, [])
 
   const handleClose = () => setShow(false)
 

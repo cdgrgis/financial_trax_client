@@ -12,27 +12,26 @@ const ChangePassword = ({ msgAlert, user }) => {
   const [newPassword, setNewPassword] = useState('')
   const [shouldNavigate, setShouldNavigate] = useState(false)
 
-  const onChangePassword = (event) => {
+  const onChangePassword = async (event) => {
     event.preventDefault()
 
-    changePassword(oldPassword, newPassword, user)
-      .then(() =>
-        msgAlert({
-          heading: 'Change Password Success',
-          message: changePasswordSuccess,
-          variant: 'success'
-        })
-      )
-      .then(() => setShouldNavigate(true))
-      .catch((error) => {
-        setOldPassword('')
-        setNewPassword('')
-        msgAlert({
-          heading: 'Change Password Failed with error: ' + error.message,
-          message: changePasswordFailure,
-          variant: 'danger'
-        })
+    try {
+      await changePassword(oldPassword, newPassword, user)
+      msgAlert({
+        heading: 'Change Password Success',
+        message: changePasswordSuccess,
+        variant: 'success'
       })
+      setShouldNavigate(true)
+    } catch (error) {
+      setOldPassword('')
+      setNewPassword('')
+      msgAlert({
+        heading: 'Change Password Failed with error: ' + error.message,
+        message: changePasswordFailure,
+        variant: 'danger'
+      })
+    }
   }
 
   if (!user || shouldNavigate) {

@@ -7,17 +7,16 @@ import { signOutSuccess } from '../AutoDismissAlert/messages'
 const SignOut = ({ msgAlert, clearUser, user }) => {
   const [shouldNavigate, setShouldNavigate] = useState(false)
 
-  useEffect(() => {
-    signOut(user)
-      .finally(() =>
-        msgAlert({
-          heading: 'Signed Out Successfully',
-          message: signOutSuccess,
-          variant: 'success'
-        })
-      )
-      .finally(() => setShouldNavigate(true))
-      .finally(() => clearUser())
+  useEffect(async () => {
+    await signOut(user)
+
+    msgAlert({
+      heading: 'Signed Out Successfully',
+      message: signOutSuccess,
+      variant: 'success'
+    })
+    setShouldNavigate(true)
+    clearUser()
   }, [])
 
   if (!user || shouldNavigate) {
