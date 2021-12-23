@@ -1,6 +1,7 @@
 import React, { Fragment } from 'react'
 import Nav from 'react-bootstrap/Nav'
 import Navbar from 'react-bootstrap/Navbar'
+import Container from 'react-bootstrap/Container'
 import { Link, NavLink } from 'react-router-dom'
 
 const authenticatedOptions = (
@@ -19,25 +20,27 @@ const unauthenticatedOptions = (
 
 const alwaysOptions = (
   <Fragment>
-    <NavLink exact to='/' className='nav-link'>Home</NavLink>
+    <NavLink to='/' className='nav-link'>Home</NavLink>
   </Fragment>
 )
 
 const Header = ({ user }) => (
   <Navbar bg='primary' variant='dark' expand='md'>
-    <Navbar.Brand>
-      <Link to='/' style={{ color: '#FFF', textDecoration: 'none' }}>react-auth-template</Link>
-    </Navbar.Brand>
-    <Navbar.Toggle aria-controls='basic-navbar-nav' />
-    <Navbar.Collapse id='basic-navbar-nav'>
-      <Nav className='ml-auto'>
-        {user && (
-          <span className='navbar-text mr-2'>Welcome, {user.email}</span>
-        )}
-        {alwaysOptions}
-        {user ? authenticatedOptions : unauthenticatedOptions}
-      </Nav>
-    </Navbar.Collapse>
+    <Container>
+      <Navbar.Brand>
+        <Link to='/' style={{ color: '#FFF', textDecoration: 'none' }}>react-auth-template</Link>
+      </Navbar.Brand>
+      <Navbar.Toggle aria-controls='basic-navbar-nav' />
+      <Navbar.Collapse id='basic-navbar-nav'>
+        <Nav className='ms-auto'>
+          {user && (
+            <span className='navbar-text me-2'>Welcome, {user.email}</span>
+          )}
+          {alwaysOptions}
+          {user ? authenticatedOptions : unauthenticatedOptions}
+        </Nav>
+      </Navbar.Collapse>
+    </Container>
   </Navbar>
 )
 

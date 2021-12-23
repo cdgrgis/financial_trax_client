@@ -14,11 +14,11 @@ or the [Express API Template](https://git.generalassemb.ly/ga-wdi-boston/express
 1. Empty [`README.md`](README.md) and fill with your own content.
 1. Replace `react-auth-template` in `package.json` with your
    projects name.
-1. Replace the `"homepage"` field in `package.json` with your (public) Github
-   account name and repository name.
-1. Install dependencies with `npm install`.
-1. `git add` and `git commit` your changes.
-1. Run the development server with `npm start`.
+2. In the `"homepage"` field of `package.json` replace `git-name` your (public) Github
+   account name and replace `repo-name` with your repository name.
+3. Install dependencies with `npm install`.
+4. `git add` and `git commit` your changes.
+5. Run the development server with `npm start`.
 
 ## Deployment
 
@@ -69,7 +69,7 @@ make it easier to make changes at the component level.
 This template comes with a handful of front-end routes that display
 different components for user actions.
 
-| Endpoint         | Component | `AuthenticatedRoute`? |
+| Endpoint         | Component | Must Be Signed In? |
 |------------------|-------------------|-------|
 | `/sign-up`       | `SignUp`    | No |
 | `/sign-in`       | `SignIn`    | No |
@@ -78,24 +78,9 @@ different components for user actions.
 
 There is no HTTP verb listed because these are all front-end routes handled by
 React. Some of these routes should not be available unless a user is signed in,
-so they will use the `AuthenticatedRoute` component instead of the regular
-`Route`. This custom component is provided as part of the template, and is not
-a part of the React library (see more below).
+so they will redirect to the `/` page if not signed in.
 
 ## Features
-
-### `<AuthenticatedRoute />`
-
-This template contains a handy component for creating routes that require a
-user to be authenticated before visiting. This component lives in
-`src/auth/components/AuthenticatedRoute.js` and is already required in `App`.
-It's a thin wrapper around React Router's `<Route />` component. The only
-difference is that it expects a prop called `user`, and if that prop is falsy,
-it will render a `<Redirect />` that takes the user to `/`. **To use
-it, you must pass it the user as a prop!**
-
-It supports both the `component=` and `render=` attributes, but like `<Route />`
-it will not forward props to the component if you use `component=`.
 
 ### `<AutoDismissAlert />` Component
 
@@ -118,7 +103,7 @@ will accept are: 'primary', 'secondary', 'success', 'danger', 'warning', 'info',
 'light', and 'dark'.
 
  To change the duration of the message, replace `5000` with a value of your
- choice (in milliseconds) in this component's `componentDidMount` method.
+ choice (in milliseconds) in this component's `useEffect` method.
 
 ### `src/apiConfig.js`
 
