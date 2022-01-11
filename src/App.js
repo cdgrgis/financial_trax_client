@@ -21,10 +21,6 @@ const App = () => {
     setMsgAlerts(msgAlerts => ([...msgAlerts, { heading, message, variant, id }]))
   }
 
-  const deleteAlert = id => {
-    setMsgAlerts(msgAlerts => msgAlerts.filter(msg => msg.id !== id))
-  }
-
   return (
     <>
       <Header user={user} />
@@ -35,7 +31,6 @@ const App = () => {
           variant={msgAlert.variant}
           message={msgAlert.message}
           id={msgAlert.id}
-          deleteAlert={deleteAlert}
         />
       ))}
       <main className='container'>
