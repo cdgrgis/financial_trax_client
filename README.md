@@ -3,8 +3,8 @@
 # react-auth-template
 
 A front-end framework template for starting projects with a recent version of
-either the [Django API Template](https://git.generalassemb.ly/ga-wdi-boston/django-template)
-or the [Express API Template](https://git.generalassemb.ly/ga-wdi-boston/express-api-template).
+either the [Django API Template](https://git.generalassemb.ly/seir-flex-831/django-template)
+or the [Express API Template](https://git.generalassemb.ly/seir-flex-831/express-api-template).
 
 ## Installation
 
@@ -32,7 +32,7 @@ it runs successfully.
 
 ## About
 
-This template is derived from GA Boston's [react-template](https://git.generalassemb.ly/ga-wdi-boston/react-template).
+This template is derived from GA Boston's [react-template](https://git.generalassemb.ly/seir-flex-831/react-template).
 Most of the development dependencies, such as linters, SCSS compiler, Webpack
 config, NPM scripts, etc in this repo come from there.
 
@@ -108,7 +108,7 @@ will accept are: 'primary', 'secondary', 'success', 'danger', 'warning', 'info',
 ### `src/apiConfig.js`
 
 Just like in
-[browser-template](https://git.generalassemb.ly/ga-wdi-boston/browser-template),
+[browser-template](https://git.generalassemb.ly/seir-flex-831/browser-template),
 this file will determine whether you're in a production or development
 environment and choose an API URL accordingly. Don't forget to replace the
 `production` URL with your deployed API's URL.
