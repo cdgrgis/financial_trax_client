@@ -5,11 +5,13 @@ import AccountForm from './AccountForm'
 import { showAccount, updateAccount } from '../../api/account'
 
 const AccountEdit = ({ user, msgAlert }) => {
-  const [accountData, setAccountData] = useState({})
-  const [name, setName] = useState('')
+  const [account, setAccount] = useState({})
+  const [type, setType] = useState('')
   const [company, setCompany] = useState('')
   const [balance, setBalance] = useState('')
   const [updated, setUpdated] = useState(false)
+  const [inception, setInception] = useState('')
+  const [accountNumber, setAccountNumber] = useState('')
   const { id } = useParams()
 
   // if user is null, redirect to home page
@@ -22,7 +24,7 @@ const AccountEdit = ({ user, msgAlert }) => {
     const fetchData = async () => {
       try {
         const res = await showAccount(user, id)
-        setAccountData(res.data.account)
+        setAccount(res.data.account)
       } catch (error) {
         msgAlert({
           heading: 'Failed to load account',
@@ -33,12 +35,12 @@ const AccountEdit = ({ user, msgAlert }) => {
     }
     fetchData()
   }, [])
-  console.log(accountData)
+  console.log(account)
   const handleSubmit = async event => {
     event.preventDefault()
 
     try {
-      await updateAccount(user, id, name, company, balance)
+      await updateAccount(user, id, type, company, balance, inception, accountNumber)
       setUpdated(true)
     } catch (error) {
       msgAlert({
@@ -60,8 +62,18 @@ const AccountEdit = ({ user, msgAlert }) => {
         <h3>Edit Account</h3>
         <AccountForm
           handleSubmit={handleSubmit}
-          accountData={accountData}
-          setAccountData={setAccountData}
+          accountData={account}
+          setAccountData={setAccount}
+          type={type}
+          company={company}
+          balance={balance}
+          inception={inception}
+          accountNumber={accountNumber}
+          setType={setType}
+          setCompany={setCompany}
+          setBalance={setBalance}
+          setInception={setInception}
+          setAccountNumber={setAccountNumber}
         />
       </div>
     </div>

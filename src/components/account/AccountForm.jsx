@@ -1,7 +1,7 @@
 import React from 'react'
 import { Form, Button } from 'react-bootstrap'
 
-const AccountForm = ({ handleSubmit, accountData, setAccountData }) => (
+const AccountForm = ({ handleSubmit, type, company, balance, inception, accountNumber, setType, setCompany, setBalance, setInception, setAccountNumber }) => (
   <Form onSubmit={handleSubmit}>
     <Form.Group controlId='type'>
       <Form.Label>Type</Form.Label>
@@ -13,14 +13,14 @@ const AccountForm = ({ handleSubmit, accountData, setAccountData }) => (
       />
     </Form.Group>
 
-    <Form.Group controlId='accountnumber'>
+    <Form.Group controlId='accountNumber'>
       <Form.Label>Account Number</Form.Label>
       <Form.Control
         placeholder='Account Number'
-        accountNumber='accountnumber'
-        value={accountData.accountnumber}
-        // onChange={event => setAccountnumber(event.target.value)}
-        onChange={event => setAccountData(prev => ({ account: { ...prev.account, }}))}
+        accountNumber='accountNumber'
+        value={accountNumber}
+        onChange={event => setAccountNumber(event.target.value)}
+        // onChange={event => setAccountData(prev => ({ account: { ...prev.account, }}))}
       />
     </Form.Group>
 
