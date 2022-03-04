@@ -8,6 +8,8 @@ const authenticatedOptions = (
   <>
     <NavLink to='/change-password' className='nav-link'>Change Password</NavLink>
     <NavLink to='/sign-out' className='nav-link'>Sign Out</NavLink>
+    <NavLink to='/accounts' className='nav-link'>Accounts</NavLink>
+    <NavLink to='/accounts/create' className='nav-link'>Create Account</NavLink>
   </>
 )
 

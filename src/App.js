@@ -10,7 +10,10 @@ import SignIn from './components/auth/SignIn'
 import SignOut from './components/auth/SignOut'
 import ChangePassword from './components/auth/ChangePassword'
 import Home from './components/Home'
-import Account from './components'/Account'
+import Accounts from './components/account/Accounts'
+import Account from './components/account/Account'
+import AccountCreate from './components/account/AccountCreate'
+import AccountUpdate from './components/account/AccountUpdate'
 
 const App = () => {
   const [user, setUser] = useState(null)
@@ -43,24 +46,36 @@ const App = () => {
           />
 
           <Route
-            path='/sign-up'
+            path='/sign-up/'
             element={<SignUp msgAlert={msgAlert} setUser={setUser} /> }
           />
           <Route
-            path='/sign-in'
+            path='/sign-in/'
             element={<SignIn msgAlert={msgAlert} setUser={setUser} /> }
           />
           <Route
-            path='/sign-out'
+            path='/sign-out/'
             element={<SignOut msgAlert={msgAlert} clearUser={clearUser} user={user} /> }
           />
           <Route
-            path='/change-password'
+            path='/change-password/'
             element={<ChangePassword msgAlert={msgAlert} user={user} /> }
           />
           <Route
-            path='/account'
+            path='/accounts/'
+            element={<Accounts msgAlert={msgAlert} user={user} /> }
+          />
+          <Route
+            path='/accounts/:id'
             element={<Account msgAlert={msgAlert} user={user} /> }
+          />
+          <Route
+            path='/accounts/create'
+            element={<AccountCreate msgAlert={msgAlert} user={user} /> }
+          />
+          <Route
+            path='/accounts/:id/edit'
+            element={<AccountUpdate msgAlert={msgAlert} user={user} /> }
           />
 
         </Routes>
