@@ -1,15 +1,26 @@
 import React from 'react'
 import { Form, Button } from 'react-bootstrap'
 
-const AccountForm = ({ handleSubmit, name, company, balance, setName, setCompany, setBalance }) => (
+const AccountForm = ({ handleSubmit, accountData, setAccountData }) => (
   <Form onSubmit={handleSubmit}>
-    <Form.Group controlId='name'>
-      <Form.Label>Name</Form.Label>
+    <Form.Group controlId='type'>
+      <Form.Label>Type</Form.Label>
       <Form.Control
-        placeholder='Account Name'
-        name='name'
-        value={name}
-        onChange={event => setName(event.target.value)}
+        placeholder='Account Type'
+        type='type'
+        value={type}
+        onChange={event => setType(event.target.value)}
+      />
+    </Form.Group>
+
+    <Form.Group controlId='accountnumber'>
+      <Form.Label>Account Number</Form.Label>
+      <Form.Control
+        placeholder='Account Number'
+        accountNumber='accountnumber'
+        value={accountData.accountnumber}
+        // onChange={event => setAccountnumber(event.target.value)}
+        onChange={event => setAccountData(prev => ({ account: { ...prev.account, }}))}
       />
     </Form.Group>
 
@@ -30,6 +41,16 @@ const AccountForm = ({ handleSubmit, name, company, balance, setName, setCompany
         balance='balance'
         value={balance}
         onChange={event => setBalance(event.target.value)}
+      />
+    </Form.Group>
+
+    <Form.Group controlId='inception'>
+      <Form.Label>Inception</Form.Label>
+      <Form.Control
+        placeholder='Account Inception'
+        inception='inception'
+        value={inception}
+        onChange={event => setInception(event.target.value)}
       />
     </Form.Group>
 

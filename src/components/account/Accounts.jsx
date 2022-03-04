@@ -46,7 +46,7 @@ const Accounts = ({ user, msgAlert }) => {
   } else {
     mappedAccounts = accounts.map(account => (
       <li key={account.id}>
-        <Link to={`/accounts/${account.id}`}>{account.name}</Link>
+        <Link to={`/accounts/${account.id}`}>{account.company} - {account.type} - {account.account_number}</Link>
       </li>
     ))
     console.log(setNavigateCreate)
@@ -56,6 +56,7 @@ const Accounts = ({ user, msgAlert }) => {
           <div className='col-sm-10 col-md-8 mx-auto mt-5'>
             <Button variant='success' onClick={handleNavigateCreate}>Create</Button>
             <h3>Accounts</h3>
+            <p>Company - Account Type - Account Number</p>
             <ul>{mappedAccounts}</ul>
           </div>
         </div>

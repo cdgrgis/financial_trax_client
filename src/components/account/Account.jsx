@@ -54,9 +54,12 @@ const Account = ({ user, msgAlert }) => {
       <>
         <div className='row'>
           <div className='col-sm-10 col-md-8 mx-auto mt-5'>
-            <h1>Name: {account.name}</h1>
+            <h1>Type: {account.type}</h1>
+            <h3>Account Number: {account.account_number}</h3>
             <h3>Company: {account.company}</h3>
             <h3>Balance: {account.balance}</h3>
+            <h3>Inception: {account.inception}</h3>
+
             <Button variant='danger' onClick={handleDelete}>Delete Account</Button>
             <Link to={`/accounts/${id}/edit`}>
               <Button variant='primary' type='submit'>Update Account</Button>

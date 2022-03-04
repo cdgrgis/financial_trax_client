@@ -17,11 +17,11 @@ export const showAccount = (user, id) => {
   })
 }
 
-export const createAccount = (user, name, company, balance) => {
+export const createAccount = (user, type, company, balance, inception, accountnumber) => {
   console.log('user ', user.token)
   return axios.post(apiUrl + '/accounts/',
     {
-      account: { name, company, balance }
+      account: { type, company, balance, inception, accountnumber }
     },
     {
       headers: {

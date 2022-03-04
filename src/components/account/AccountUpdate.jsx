@@ -5,6 +5,7 @@ import AccountForm from './AccountForm'
 import { showAccount, updateAccount } from '../../api/account'
 
 const AccountEdit = ({ user, msgAlert }) => {
+  const [accountData, setAccountData] = useState({})
   const [name, setName] = useState('')
   const [company, setCompany] = useState('')
   const [balance, setBalance] = useState('')
@@ -21,9 +22,7 @@ const AccountEdit = ({ user, msgAlert }) => {
     const fetchData = async () => {
       try {
         const res = await showAccount(user, id)
-        setName(res.data.account.name)
-        setCompany(res.data.account.company)
-        setBalance(res.data.account.balance)
+        setAccountData(res.data.account)
       } catch (error) {
         msgAlert({
           heading: 'Failed to load account',
@@ -34,7 +33,7 @@ const AccountEdit = ({ user, msgAlert }) => {
     }
     fetchData()
   }, [])
-
+  console.log(accountData)
   const handleSubmit = async event => {
     event.preventDefault()
 
@@ -61,12 +60,8 @@ const AccountEdit = ({ user, msgAlert }) => {
         <h3>Edit Account</h3>
         <AccountForm
           handleSubmit={handleSubmit}
-          name={name}
-          company={company}
-          balance={balance}
-          setName={setName}
-          setCompany={setCompany}
-          setBalance={setBalance}
+          accountData={accountData}
+          setAccountData={setAccountData}
         />
       </div>
     </div>
