@@ -21,7 +21,7 @@ export const createAccount = (user, type, company, balance, inception, accountnu
   console.log('user ', user.token)
   return axios.post(apiUrl + '/accounts/',
     {
-      account: { type, company, balance, inception, accountnumber }
+      account: { type, company, balance, inception, account_number: accountnumber }
     },
     {
       headers: {
@@ -30,10 +30,10 @@ export const createAccount = (user, type, company, balance, inception, accountnu
     })
 }
 
-export const updateAccount = (user, id, name, company, balance) => {
+export const updateAccount = (user, id, type, company, balance, inception, accountnumber) => {
   return axios.patch(apiUrl + `/accounts/${id}/`,
     {
-      account: { name, company, balance }
+      account: { type, company, balance, inception, account_number: accountnumber }
     },
     {
       headers: {

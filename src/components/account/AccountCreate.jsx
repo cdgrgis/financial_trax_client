@@ -9,15 +9,15 @@ const AccountCreate = ({ user, msgAlert }) => {
   const [type, setType] = useState('')
   const [company, setCompany] = useState('')
   const [balance, setBalance] = useState(0)
-  const [inception, setInception] = useState(null)
-  const [accountNumber, setAccountNumber] = useState('')
-  const [createdId, setCreatedId] = useState(null)
+  const [inception, setInception] = useState('')
+  const [accountnumber, setAccountnumber] = useState('')
+  const [createdId, setCreatedId] = useState('')
 
   const handleSubmit = async event => {
     event.preventDefault()
 
     try {
-      const res = await createAccount(user, type, company, balance, inception, accountNumber)
+      const res = await createAccount(user, type, company, balance, inception, accountnumber)
       console.log('res ', res.data.account)
       setCreatedId(res.data.account.id)
 
@@ -52,12 +52,12 @@ const AccountCreate = ({ user, msgAlert }) => {
           company={company}
           balance={balance}
           inception={inception}
-          accountNumber={accountNumber}
+          accountnumber={accountnumber}
           setType={setType}
           setCompany={setCompany}
           setBalance={setBalance}
           setInception={setInception}
-          setAccountNumber={setAccountNumber}
+          setAccountnumber={setAccountnumber}
         />
       </div>
     </div>
