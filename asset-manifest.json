@@ -1,0 +1,20 @@
+{
+  "files": {
+    "main.css": "/financial_trax_client/static/css/main.1af45343.chunk.css",
+    "main.js": "/financial_trax_client/static/js/main.a82c56da.chunk.js",
+    "main.js.map": "/financial_trax_client/static/js/main.a82c56da.chunk.js.map",
+    "runtime-main.js": "/financial_trax_client/static/js/runtime-main.931626dc.js",
+    "runtime-main.js.map": "/financial_trax_client/static/js/runtime-main.931626dc.js.map",
+    "static/js/2.a7732dff.chunk.js": "/financial_trax_client/static/js/2.a7732dff.chunk.js",
+    "static/js/2.a7732dff.chunk.js.map": "/financial_trax_client/static/js/2.a7732dff.chunk.js.map",
+    "index.html": "/financial_trax_client/index.html",
+    "static/css/main.1af45343.chunk.css.map": "/financial_trax_client/static/css/main.1af45343.chunk.css.map",
+    "static/js/2.a7732dff.chunk.js.LICENSE.txt": "/financial_trax_client/static/js/2.a7732dff.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.931626dc.js",
+    "static/js/2.a7732dff.chunk.js",
+    "static/css/main.1af45343.chunk.css",
+    "static/js/main.a82c56da.chunk.js"
+  ]
+}
