@@ -5,11 +5,13 @@ import AccountForm from './AccountForm'
 import { showAccount, updateAccount } from '../../api/account'
 
 const AccountEdit = ({ user, msgAlert }) => {
-  const [type, setType] = useState('')
-  const [company, setCompany] = useState('')
-  const [balance, setBalance] = useState('')
-  const [inception, setInception] = useState('')
-  const [accountnumber, setAccountnumber] = useState('')
+  const [account, setAccount] = useState({
+    type: '',
+    company: '',
+    balance: 0,
+    inception: '',
+    account_number: ''
+  })
   const [updated, setUpdated] = useState(false)
   const { id } = useParams()
 
@@ -23,12 +25,8 @@ const AccountEdit = ({ user, msgAlert }) => {
     const fetchData = async () => {
       try {
         const res = await showAccount(user, id)
-        console.log('res ', res)
-        setType(res.data.account.type)
-        setCompany(res.data.account.company)
-        setBalance(res.data.account.balance)
-        setInception(res.data.account.inception)
-        setAccountnumber(res.data.account.account_number)
+        console.log('res ', res.data)
+        setAccount(res.data.account)
       } catch (error) {
         msgAlert({
           heading: 'Failed to load account',
@@ -39,12 +37,13 @@ const AccountEdit = ({ user, msgAlert }) => {
     }
     fetchData()
   }, [])
+  console.log('account data', account)
 
   const handleSubmit = async event => {
     event.preventDefault()
 
     try {
-      await updateAccount(user, id, type, company, balance, inception, accountnumber)
+      await updateAccount(user, id, account)
       setUpdated(true)
     } catch (error) {
       msgAlert({
@@ -66,16 +65,8 @@ const AccountEdit = ({ user, msgAlert }) => {
         <h3>Edit Account</h3>
         <AccountForm
           handleSubmit={handleSubmit}
-          type={type}
-          company={company}
-          balance={balance}
-          inception={inception}
-          accountnumber={accountnumber}
-          setType={setType}
-          setCompany={setCompany}
-          setBalance={setBalance}
-          setInception={setInception}
-          setAccountnumber={setAccountnumber}
+          account={account}
+          setAccount={setAccount}
         />
       </div>
     </div>

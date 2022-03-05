@@ -1,15 +1,15 @@
 import React from 'react'
 import { Form, Button } from 'react-bootstrap'
 
-const AccountForm = ({ handleSubmit, type, company, balance, inception, accountnumber, setType, setCompany, setBalance, setInception, setAccountnumber }) => (
+const AccountForm = ({ handleSubmit, account, setAccount }) => (
   <Form onSubmit={handleSubmit}>
     <Form.Group controlId='type'>
       <Form.Label>Type</Form.Label>
       <Form.Control
         placeholder='Account Type'
         type='type'
-        value={type}
-        onChange={event => setType(event.target.value)}
+        value={account.type}
+        onChange={event => setAccount(prev => ({ ...prev, type: event.target.value })) }
       />
     </Form.Group>
 
@@ -18,9 +18,8 @@ const AccountForm = ({ handleSubmit, type, company, balance, inception, accountn
       <Form.Control
         placeholder='Account Number'
         accountnumber='accountnumber'
-        value={accountnumber}
-        onChange={event => setAccountnumber(event.target.value)}
-        // onChange={event => setAccountData(prev => ({ account: { ...prev.account, }}))}
+        value={account.account_number}
+        onChange={event => setAccount(prev => ({ ...prev, account_number: event.target.value })) }
       />
     </Form.Group>
 
@@ -29,8 +28,8 @@ const AccountForm = ({ handleSubmit, type, company, balance, inception, accountn
       <Form.Control
         placeholder='Account Company'
         company='company'
-        value={company}
-        onChange={event => setCompany(event.target.value)}
+        value={account.company}
+        onChange={event => setAccount(prev => ({ ...prev, company: event.target.value })) }
       />
     </Form.Group>
 
@@ -39,8 +38,8 @@ const AccountForm = ({ handleSubmit, type, company, balance, inception, accountn
       <Form.Control
         placeholder='Account Balance'
         balance='balance'
-        value={balance}
-        onChange={event => setBalance(event.target.value)}
+        value={account.balance}
+        onChange={event => setAccount(prev => ({ ...prev, balance: event.target.value })) }
       />
     </Form.Group>
 
@@ -49,8 +48,8 @@ const AccountForm = ({ handleSubmit, type, company, balance, inception, accountn
       <Form.Control
         placeholder='Account Inception'
         inception='inception'
-        value={inception}
-        onChange={event => setInception(event.target.value)}
+        value={account.inception}
+        onChange={event => setAccount(prev => ({ ...prev, inception: event.target.value })) }
       />
     </Form.Group>
 

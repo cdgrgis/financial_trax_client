@@ -6,24 +6,28 @@ import AccountForm from './AccountForm'
 import { createAccount } from '../../api/account'
 
 const AccountCreate = ({ user, msgAlert }) => {
-  const [type, setType] = useState('')
-  const [company, setCompany] = useState('')
-  const [balance, setBalance] = useState(0)
-  const [inception, setInception] = useState('')
-  const [accountnumber, setAccountnumber] = useState('')
+  const [account, setAccount] = useState({
+    type: '',
+    company: '',
+    balance: 0,
+    inception: '',
+    account_number: ''
+  })
   const [createdId, setCreatedId] = useState('')
+
+  console.log('account data ', account)
 
   const handleSubmit = async event => {
     event.preventDefault()
 
     try {
-      const res = await createAccount(user, type, company, balance, inception, accountnumber)
+      const res = await createAccount(user, account)
       console.log('res ', res.data.account)
       setCreatedId(res.data.account.id)
 
       msgAlert({
         heading: 'Account Created',
-        message: `Created ${type} successfully.`,
+        message: `Created ${account.type} successfully.`,
         variant: 'success'
       })
     } catch (error) {
@@ -48,16 +52,8 @@ const AccountCreate = ({ user, msgAlert }) => {
         <h3>Create Account</h3>
         <AccountForm
           handleSubmit={handleSubmit}
-          type={type}
-          company={company}
-          balance={balance}
-          inception={inception}
-          accountnumber={accountnumber}
-          setType={setType}
-          setCompany={setCompany}
-          setBalance={setBalance}
-          setInception={setInception}
-          setAccountnumber={setAccountnumber}
+          account={account}
+          setAccount={setAccount}
         />
       </div>
     </div>

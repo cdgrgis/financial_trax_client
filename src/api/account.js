@@ -17,12 +17,10 @@ export const showAccount = (user, id) => {
   })
 }
 
-export const createAccount = (user, type, company, balance, inception, accountnumber) => {
+export const createAccount = (user, account) => {
   console.log('user ', user.token)
   return axios.post(apiUrl + '/accounts/',
-    {
-      account: { type, company, balance, inception, account_number: accountnumber }
-    },
+    { account },
     {
       headers: {
         Authorization: `Token ${user.token}`
@@ -30,11 +28,9 @@ export const createAccount = (user, type, company, balance, inception, accountnu
     })
 }
 
-export const updateAccount = (user, id, type, company, balance, inception, accountnumber) => {
+export const updateAccount = (user, id, account) => {
   return axios.patch(apiUrl + `/accounts/${id}/`,
-    {
-      account: { type, company, balance, inception, account_number: accountnumber }
-    },
+    { account },
     {
       headers: {
         Authorization: `Token ${user.token}`
