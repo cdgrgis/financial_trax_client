@@ -24,6 +24,7 @@ const SignOut = ({ msgAlert, clearUser, user }) => {
 
       // reset the user back to its initial value
       clearUser()
+      localStorage.clear()
       setShouldNavigate(true)
     }
     performSignOut()

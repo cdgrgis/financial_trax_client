@@ -1,25 +1,23 @@
 import React, { useState, useEffect } from 'react'
 import { Link, Navigate } from 'react-router-dom'
 import { Spinner, Button } from 'react-bootstrap'
-import { indexAccount } from '../../api/account'
+import { indexFund } from '../../api/fund'
 
-const Accounts = ({ user, msgAlert }) => {
+const Funds = ({ user, msgAlert }) => {
   if (!user) return <Navigate to ='/' />
 
-  const [accounts, setAccounts] = useState([])
+  const [funds, setFunds] = useState([])
   const [navigateCreate, setNavigateCreate] = useState(false)
-
-  let mappedAccounts
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const res = await indexAccount(user)
+        const res = await indexFund(user)
         console.log('res ', res.data)
-        setAccounts(res.data.accounts)
+        setFunds(res.data.funds)
       } catch (error) {
         msgAlert({
-          heading: 'Accounts List failed to load',
+          heading: 'Funds List failed to load',
           message: error.message,
           variant: 'danger'
         })
@@ -32,23 +30,23 @@ const Accounts = ({ user, msgAlert }) => {
     setNavigateCreate(true)
   }
 
-  console.log('account ', accounts)
-
-  // If accounts is null, accounts is still loading
-  if (!accounts) {
+  console.log('fund ', funds)
+  let mappedFunds
+  // If funds is null, funds is still loading
+  if (!funds) {
     return (
       <Spinner animation='border' role='status'>
         <span className='visually-hidden'>Loading...</span>
       </Spinner>
     )
-  } else if (accounts.length === 0) {
-    return <h1>No accounts have been added</h1>
+  } else if (funds.length === 0) {
+    return <h1>No funds have been added</h1>
   } else if (navigateCreate) {
-    return <Navigate to='/accounts/create' />
+    return <Navigate to='/funds/create' />
   } else {
-    mappedAccounts = accounts.map(account => (
-      <li key={account.id}>
-        <Link to={`/accounts/${account.id}`}>{account.company} - {account.type} - {account.account_number}</Link>
+    mappedFunds = funds.map(fund => (
+      <li key={fund.id}>
+        <Link to={`/funds/${fund.id}`}>{fund.company_name} - {fund.ticker_symbol} - {fund.price}</Link>
       </li>
     ))
     console.log(setNavigateCreate)
@@ -57,9 +55,9 @@ const Accounts = ({ user, msgAlert }) => {
         <div className='row'>
           <div className='col-sm-10 col-md-8 mx-auto mt-5'>
             <Button variant='success' onClick={handleNavigateCreate}>Create</Button>
-            <h3>Accounts</h3>
-            <p>Company - Account Type - Account Number</p>
-            <ul>{mappedAccounts}</ul>
+            <h3>Funds</h3>
+            <p>Company - Ticker - Price</p>
+            <ul>{mappedFunds}</ul>
           </div>
         </div>
       </>
@@ -68,4 +66,4 @@ const Accounts = ({ user, msgAlert }) => {
   }
 }
 
-export default Accounts
+export default Funds
