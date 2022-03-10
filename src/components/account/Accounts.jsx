@@ -41,10 +41,15 @@ const Accounts = ({ user, msgAlert }) => {
         <span className='visually-hidden'>Loading...</span>
       </Spinner>
     )
-  } else if (accounts.length === 0) {
-    return <h1>No accounts have been added</h1>
   } else if (navigateCreate) {
     return <Navigate to='/accounts/create' />
+  } else if (accounts.length === 0) {
+    return (
+      <>
+        <h1>No accounts have been added</h1>
+        <Button variant='success' onClick={handleNavigateCreate}>Create</Button>
+      </>
+    )
   } else {
     mappedAccounts = accounts.map(account => (
       <li key={account.id}>

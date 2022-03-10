@@ -22,7 +22,7 @@ const Account = ({ user, msgAlert }) => {
     amount_owned: 0,
     balance: 0,
     account: 0,
-    fund: ''
+    fund: 0
   })
   const [createdId, setCreatedId] = useState('')
   const [amountOwned, setAmountOwned] = useState(0)
@@ -36,6 +36,7 @@ const Account = ({ user, msgAlert }) => {
         const res = await showAccount(user, id)
         console.log('res ', res.data)
         setAccount(res.data.account)
+        setFundInfo(prev => ({ ...prev, account: res.data.account.id }))
       } catch (error) {
         msgAlert({
           heading: 'Account failed to load',
@@ -67,6 +68,7 @@ const Account = ({ user, msgAlert }) => {
       const res = await createFund(user, fund, account.id)
       console.log('fund res ', res.data.fund)
       setCreatedId(res.data.fund.id)
+      setFundInfo(prev => ({ ...prev, fund: res.data.fund.id, price: (res.data.fund.price * prev.amount_owned) }))
 
       msgAlert({
         heading: 'Fund Created',
@@ -82,6 +84,7 @@ const Account = ({ user, msgAlert }) => {
     }
 
     try {
+      console.log('fund info ', fundInfo)
       const res = await createFundInfo(user, fundInfo)
       console.log('fund info res ', res)
 
