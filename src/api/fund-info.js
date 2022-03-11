@@ -1,6 +1,14 @@
 import apiUrl from '../apiConfig'
 import axios from 'axios'
 
+export const indexAccountSpecificFundInfo = (user, id) => {
+  return axios.get(apiUrl + `/accounts/${id}/fund-infos/`, {
+    headers: {
+      Authorization: `Token ${user.token}`
+    }
+  })
+}
+
 export const indexFundInfo = (user) => {
   return axios.get(apiUrl + '/fund-infos/', {
     headers: {
