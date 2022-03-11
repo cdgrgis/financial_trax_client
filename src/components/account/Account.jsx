@@ -16,12 +16,12 @@ const Account = ({ user, msgAlert }) => {
   const { id } = useParams()
 
   const [fund, setFund] = useState({
-    ticker_symbol: 'GME',
-    company_name: 'GameStop Corp',
-    price: 152.81
+    ticker_symbol: '',
+    company_name: '',
+    price: ''
   })
   const [fundInfo, setFundInfo] = useState({
-    amount_owned: 4,
+    amount_owned: '',
     balance: 0,
     account: 0,
     fund: 0
@@ -38,7 +38,7 @@ const Account = ({ user, msgAlert }) => {
       console.log(reject)
     })
 
-    myPromise()
+    myPromise
       .then(res => {
         console.log('res ', res.data.account)
         setAccount(res.data.account)
@@ -46,24 +46,35 @@ const Account = ({ user, msgAlert }) => {
         return res.data.account.id
       })
       .then(id => indexAccountSpecificFundInfo(user, id))
-    const fetchData = async () => {
-      try {
-        const res = await showAccount(user, id)
-        console.log('res ', res.data.account)
-        setAccount(res.data.account)
-        setFundInfo(prev => ({ ...prev, account: res.data.account.id }))
-        const fundRes = await indexAccountSpecificFundInfo(user, res.data.account.id)
-        console.log('fund info res ', fundRes.data.fund_infos)
-        setFundInfoData([fundRes.data.fund_infos[0]])
-      } catch (error) {
+      .then(fundRes => {
+        console.log('get fund info res ', fundRes.data.fund_infos)
+        setFundInfoData(fundRes.data.fund_infos)
+      })
+      .catch(err => {
         msgAlert({
           heading: 'Account failed to load',
-          message: error.message,
+          message: err.message,
           variant: 'danger'
         })
-      }
-    }
-    fetchData()
+      })
+    // const fetchData = async () => {
+    //   try {
+    //     const res = await showAccount(user, id)
+    //     console.log('res ', res.data.account)
+    //     setAccount(res.data.account)
+    //     setFundInfo(prev => ({ ...prev, account: res.data.account.id }))
+    //     const fundRes = await indexAccountSpecificFundInfo(user, res.data.account.id)
+    //     console.log('fund info res ', fundRes.data.fund_infos)
+    //     setFundInfoData([fundRes.data.fund_infos[0]])
+    //   } catch (error) {
+    //     msgAlert({
+    //       heading: 'Account failed to load',
+    //       message: error.message,
+    //       variant: 'danger'
+    //     })
+    //   }
+    // }
+    // fetchData()
   }, [])
 
   const handleDelete = async () => {
@@ -89,8 +100,6 @@ const Account = ({ user, msgAlert }) => {
     myPromise
       .then(res => {
         console.log('fund res ', res)
-        // setCreatedId(res.data.fund.id)
-
         setFundInfo(prev => ({ ...prev, fund: res.data.fund.id, balance: (res.data.fund.price * prev.amount_owned) }))
         console.log('fund info ', fundInfo)
       })
@@ -143,10 +152,11 @@ const Account = ({ user, msgAlert }) => {
     mappedFunds = fundInfoData.map(fundInfo => {
       console.log('map fund ', fundInfo)
       return (
-        <>
-          <h3>Fund: {fundInfo.fund}</h3>
-          <h4>Amount Owned: {fundInfo.amount_owned}</h4>
-        </>
+        <li key={fundInfo.id}>
+          <Link to={`/fund-infos/${fundInfo.id}`}>
+            {fundInfo.fund.company_name} - {fundInfo.fund.ticker_symbol} - Price: {fundInfo.fund.price} - Owned: {fundInfo.amount_owned} - Balance: {fundInfo.balance}
+          </Link>
+        </li>
       )
     })
   }
@@ -169,8 +179,10 @@ const Account = ({ user, msgAlert }) => {
             <h3>Company: {account.company}</h3>
             <h3>Balance: {account.balance}</h3>
             <h3>Inception: {account.inception}</h3>
-            <h3>Funds</h3>
-            {fundInfoData && mappedFunds}
+            <br></br>
+            <h3>Funds</h3><ul>
+              {fundInfoData && mappedFunds}
+            </ul>
 
             <Button variant='danger' onClick={handleDelete}>Delete Account</Button>
             <Link to={`/accounts/${id}/edit`}>

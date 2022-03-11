@@ -22,6 +22,8 @@ import Fund from './components/fund/Fund'
 import FundCreate from './components/fund/FundCreate'
 import FundUpdate from './components/fund/FundUpdate'
 
+import FundInfo from './components/fund-info/FundInfo'
+
 const App = () => {
   const [user, setUser] = useState(null)
   const [msgAlerts, setMsgAlerts] = useState([])
@@ -110,6 +112,10 @@ const App = () => {
           <Route
             path='/funds/:id/edit'
             element={<FundUpdate msgAlert={msgAlert} user={user} /> }
+          />
+          <Route
+            path='/fund-infos/:id'
+            element={<FundInfo msgAlert={msgAlert} user={user} /> }
           />
         </Routes>
       </main>
