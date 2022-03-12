@@ -11,8 +11,10 @@ import { createFundInfo, indexAccountSpecificFundInfo } from '../../api/fund-inf
 const Account = ({ user, msgAlert }) => {
   const [account, setAccount] = useState({})
   const [fundInfoData, setFundInfoData] = useState([])
+  const [balance, setBalance] = useState(0)
 
   const [deleted, setDeleted] = useState(false)
+  const [fundCreatedId, setFundCreatedId] = useState('')
   const { id } = useParams()
 
   const [fund, setFund] = useState({
@@ -47,7 +49,7 @@ const Account = ({ user, msgAlert }) => {
       })
       .then(id => indexAccountSpecificFundInfo(user, id))
       .then(fundRes => {
-        console.log('get fund info res ', fundRes.data.fund_infos)
+        setBalance(fundRes.data.balance.balance__sum)
         setFundInfoData(fundRes.data.fund_infos)
       })
       .catch(err => {
@@ -102,9 +104,18 @@ const Account = ({ user, msgAlert }) => {
         console.log('fund res ', res)
         setFundInfo(prev => ({ ...prev, fund: res.data.fund.id, balance: (res.data.fund.price * prev.amount_owned) }))
         console.log('fund info ', fundInfo)
+        return fundInfo
       })
-      .then(() => createFundInfo(user, fundInfo))
-      .then(res => console.log('fund info res ', res))
+      .then((fundInfo) => createFundInfo(user, fundInfo))
+      .then(res => {
+        console.log('fund info res ', res)
+        setFundCreatedId(res.data.fund_info.id)
+        msgAlert({
+          heading: 'Fund Created',
+          message: `Created ${fundInfo.fund.company_name} successfully.`,
+          variant: 'success'
+        })
+      })
 
       .catch(error => console.error(error))
     // try {
@@ -150,7 +161,6 @@ const Account = ({ user, msgAlert }) => {
   if (fundInfoData) {
     console.log('fund info data ', fundInfoData)
     mappedFunds = fundInfoData.map(fundInfo => {
-      console.log('map fund ', fundInfo)
       return (
         <li key={fundInfo.id}>
           <Link to={`/fund-infos/${fundInfo.id}`}>
@@ -160,7 +170,7 @@ const Account = ({ user, msgAlert }) => {
       )
     })
   }
-
+  console.log('useless ', setBalance)
   if (!account) {
     return (
       <Spinner animation='border' role='status'>
@@ -169,25 +179,32 @@ const Account = ({ user, msgAlert }) => {
     )
   } else if (deleted) {
     return <Navigate to='/accounts/' />
+  } else if (fundCreatedId) {
+    return <Navigate to={`/fund-infos/${fundCreatedId}`} />
   } else {
     return (
       <>
         <div className='row'>
           <div className='col-sm-10 col-md-8 mx-auto mt-5'>
-            <h1>Type: {account.type}</h1>
-            <h3>Account Number: {account.account_number}</h3>
-            <h3>Company: {account.company}</h3>
-            <h3>Balance: {account.balance}</h3>
-            <h3>Inception: {account.inception}</h3>
-            <br></br>
-            <h3>Funds</h3><ul>
-              {fundInfoData && mappedFunds}
-            </ul>
-
             <Button variant='danger' onClick={handleDelete}>Delete Account</Button>
             <Link to={`/accounts/${id}/edit`}>
               <Button variant='primary' type='submit'>Update Account</Button>
             </Link>
+            <h1>{account.company} {account.type}</h1>
+
+            <h3>Account Number: {account.account_number}</h3>
+
+            {balance && (<h3>Balance: {balance}</h3>)}
+            <h3>Inception: {account.inception}</h3>
+            <br></br>
+            {fundInfoData !== [] && (
+              <>
+                <h3>Funds</h3>
+                <ul>
+                  {mappedFunds}
+                </ul>
+              </>
+            )}
           </div>
 
           <div>

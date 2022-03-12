@@ -29,6 +29,7 @@ export const createFund = (user, fund, id) => {
 }
 
 export const updateFund = (user, id, fund) => {
+  console.log('api fund ', fund)
   return axios.patch(apiUrl + `/funds/${id}/`,
     { fund },
     {

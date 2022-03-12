@@ -9,8 +9,6 @@ const authenticatedOptions = (
     <NavLink to='/change-password' className='nav-link'>Change Password</NavLink>
     <NavLink to='/sign-out' className='nav-link'>Sign Out</NavLink>
     <NavLink to='/accounts' className='nav-link'>Accounts</NavLink>
-    <NavLink to='/accounts/create' className='nav-link'>Create Account</NavLink>
-    <NavLink to='/funds' className='nav-link'>Funds</NavLink>
   </>
 )
 
@@ -31,7 +29,7 @@ const Header = ({ user }) => (
   <Navbar bg='primary' variant='dark' expand='md'>
     <Container>
       <Navbar.Brand>
-        <Link to='/' style={{ color: '#FFF', textDecoration: 'none' }}>Financial Trax</Link>
+        <Link to='/' style={{ color: '#FFF', textDecoration: 'none' }}>$$ Financial Trax $$</Link>
       </Navbar.Brand>
       <Navbar.Toggle aria-controls='basic-navbar-nav' />
       <Navbar.Collapse id='basic-navbar-nav'>

@@ -1,55 +1,42 @@
 import React from 'react'
 import { Form, Button } from 'react-bootstrap'
 
-const AccountForm = ({ handleSubmit, account, setAccount }) => (
+const AccountForm = ({ handleSubmit, account, handleAccountChange }) => (
   <Form onSubmit={handleSubmit}>
     <Form.Group controlId='type'>
       <Form.Label>Type</Form.Label>
       <Form.Control
         placeholder='Account Type'
-        type='type'
+        name='type'
         value={account.type}
-        onChange={event => setAccount(prev => ({ ...prev, type: event.target.value })) }
-      />
+        onChange={handleAccountChange} />
     </Form.Group>
 
     <Form.Group controlId='accountnumber'>
       <Form.Label>Account Number</Form.Label>
       <Form.Control
         placeholder='Account Number'
-        accountnumber='accountnumber'
+        name='account_number'
         value={account.account_number}
-        onChange={event => setAccount(prev => ({ ...prev, account_number: event.target.value })) }
-      />
+        onChange={handleAccountChange} />
     </Form.Group>
 
     <Form.Group controlId='company'>
       <Form.Label>Company</Form.Label>
       <Form.Control
         placeholder='Account Company'
-        company='company'
+        name='company'
         value={account.company}
-        onChange={event => setAccount(prev => ({ ...prev, company: event.target.value })) }
-      />
-    </Form.Group>
-
-    <Form.Group controlId='balance'>
-      <Form.Label>Balance</Form.Label>
-      <Form.Control
-        placeholder='Account Balance'
-        balance='balance'
-        value={account.balance}
-        onChange={event => setAccount(prev => ({ ...prev, balance: event.target.value })) }
-      />
+        onChange={handleAccountChange} />
     </Form.Group>
 
     <Form.Group controlId='inception'>
       <Form.Label>Inception</Form.Label>
       <Form.Control
         placeholder='Account Inception'
-        inception='inception'
+        name='inception'
         value={account.inception}
-        onChange={event => setAccount(prev => ({ ...prev, inception: event.target.value })) }
+        onChange={handleAccountChange}
       />
     </Form.Group>
 

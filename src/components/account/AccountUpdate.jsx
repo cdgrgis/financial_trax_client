@@ -8,7 +8,6 @@ const AccountEdit = ({ user, msgAlert }) => {
   const [account, setAccount] = useState({
     type: '',
     company: '',
-    balance: 0,
     inception: '',
     account_number: ''
   })
@@ -54,6 +53,10 @@ const AccountEdit = ({ user, msgAlert }) => {
     }
   }
 
+  const handleAccountChange = ({ target }) => {
+    setAccount(prev => ({ ...prev, [target.name]: target.value }))
+  }
+
   if (updated) {
     // Navigate to the 'show' page
     return <Navigate to={`/accounts/${id}`} />
@@ -66,7 +69,7 @@ const AccountEdit = ({ user, msgAlert }) => {
         <AccountForm
           handleSubmit={handleSubmit}
           account={account}
-          setAccount={setAccount}
+          handleAccountChange={handleAccountChange}
         />
       </div>
     </div>

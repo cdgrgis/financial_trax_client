@@ -56,7 +56,6 @@ const Accounts = ({ user, msgAlert }) => {
         <Link to={`/accounts/${account.id}`}>{account.company} - {account.type} - {account.account_number}</Link>
       </li>
     ))
-    console.log(setNavigateCreate)
     return (
       <>
         <div className='row'>

@@ -9,7 +9,6 @@ const AccountCreate = ({ user, msgAlert }) => {
   const [account, setAccount] = useState({
     type: '',
     company: '',
-    balance: 0,
     inception: '',
     account_number: ''
   })
@@ -39,6 +38,10 @@ const AccountCreate = ({ user, msgAlert }) => {
     }
   }
 
+  const handleAccountChange = ({ target }) => {
+    setAccount(prev => ({ ...prev, [target.name]: target.value }))
+  }
+
   // if user is null, redirect to home page
   if (!user) {
     return <Navigate to='/' />
@@ -52,8 +55,8 @@ const AccountCreate = ({ user, msgAlert }) => {
         <h3>Create Account</h3>
         <AccountForm
           handleSubmit={handleSubmit}
+          handleAccountChange={handleAccountChange}
           account={account}
-          setAccount={setAccount}
         />
       </div>
     </div>
