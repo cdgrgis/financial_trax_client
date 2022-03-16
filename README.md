@@ -55,7 +55,7 @@ I begun with completing the routes for my user authentication and first resource
 
 [API Repository](https://github.com/cdgrgis/financial_trax_api)
 
-[API](https://dashboard.heroku.com/apps/financial-trax-api)
+[API](https://financial-trax-api.herokuapp.com)
 
 # ERD
 ![Models](https://user-images.githubusercontent.com/88337158/156482703-cb6e21ee-2890-4d3a-bcd3-533f96407315.png)

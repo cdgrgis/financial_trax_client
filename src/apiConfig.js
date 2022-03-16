@@ -1,6 +1,6 @@
 let apiUrl
 const apiUrls = {
-  production: 'https://dashboard.heroku.com/apps/financial-trax-api',
+  production: 'https://financial-trax-api.herokuapp.com',
   development: 'http://localhost:8000'
 }
 if (window.location.hostname === 'localhost') {
