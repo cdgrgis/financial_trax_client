@@ -1,8 +1,8 @@
 {
   "files": {
     "main.css": "/financial_trax_client/static/css/main.ea944731.chunk.css",
-    "main.js": "/financial_trax_client/static/js/main.554d04fa.chunk.js",
-    "main.js.map": "/financial_trax_client/static/js/main.554d04fa.chunk.js.map",
+    "main.js": "/financial_trax_client/static/js/main.d9e09ce1.chunk.js",
+    "main.js.map": "/financial_trax_client/static/js/main.d9e09ce1.chunk.js.map",
     "runtime-main.js": "/financial_trax_client/static/js/runtime-main.931626dc.js",
     "runtime-main.js.map": "/financial_trax_client/static/js/runtime-main.931626dc.js.map",
     "static/js/2.5ba9c4b5.chunk.js": "/financial_trax_client/static/js/2.5ba9c4b5.chunk.js",
@@ -15,6 +15,6 @@
     "static/js/runtime-main.931626dc.js",
     "static/js/2.5ba9c4b5.chunk.js",
     "static/css/main.ea944731.chunk.css",
-    "static/js/main.554d04fa.chunk.js"
+    "static/js/main.d9e09ce1.chunk.js"
   ]
 }
