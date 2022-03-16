@@ -19,7 +19,6 @@ const SignIn = ({ msgAlert, setUser }) => {
       const res = await signIn(email, password)
       setUser(res.data.user)
       localStorage.setItem('user', JSON.stringify(res.data.user))
-      console.log('user ', res.data.user)
 
       msgAlert({
         heading: 'Sign In Success',

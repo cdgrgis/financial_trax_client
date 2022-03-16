@@ -14,14 +14,11 @@ const AccountCreate = ({ user, msgAlert }) => {
   })
   const [createdId, setCreatedId] = useState('')
 
-  console.log('account data ', account)
-
   const handleSubmit = async event => {
     event.preventDefault()
 
     try {
       const res = await createAccount(user, account)
-      console.log('res ', res.data.account)
       setCreatedId(res.data.account.id)
 
       msgAlert({

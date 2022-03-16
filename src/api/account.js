@@ -18,7 +18,6 @@ export const showAccount = (user, id) => {
 }
 
 export const createAccount = (user, account) => {
-  console.log('user ', user.token)
   return axios.post(apiUrl + '/accounts/',
     { account },
     {

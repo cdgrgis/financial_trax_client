@@ -15,7 +15,6 @@ const Fund = ({ user, msgAlert }) => {
     const fetchData = async () => {
       try {
         const res = await showFund(user, id)
-        console.log('res ', res.data)
         setFund(res.data.fund)
       } catch (error) {
         msgAlert({

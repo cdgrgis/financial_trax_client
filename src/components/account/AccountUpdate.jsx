@@ -24,7 +24,6 @@ const AccountEdit = ({ user, msgAlert }) => {
     const fetchData = async () => {
       try {
         const res = await showAccount(user, id)
-        console.log('res ', res.data)
         setAccount(res.data.account)
       } catch (error) {
         msgAlert({
@@ -36,7 +35,6 @@ const AccountEdit = ({ user, msgAlert }) => {
     }
     fetchData()
   }, [])
-  console.log('account data', account)
 
   const handleSubmit = async event => {
     event.preventDefault()

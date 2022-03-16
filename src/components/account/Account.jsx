@@ -42,7 +42,6 @@ const Account = ({ user, msgAlert }) => {
 
     myPromise
       .then(res => {
-        console.log('res ', res.data.account)
         setAccount(res.data.account)
         setFundInfo(prev => ({ ...prev, account: res.data.account.id }))
         return res.data.account.id
@@ -54,29 +53,11 @@ const Account = ({ user, msgAlert }) => {
       })
       .catch(err => {
         msgAlert({
-          heading: 'Account failed to load',
+          heading: 'Fund Info Update Failed',
           message: err.message,
           variant: 'danger'
         })
       })
-    // const fetchData = async () => {
-    //   try {
-    //     const res = await showAccount(user, id)
-    //     console.log('res ', res.data.account)
-    //     setAccount(res.data.account)
-    //     setFundInfo(prev => ({ ...prev, account: res.data.account.id }))
-    //     const fundRes = await indexAccountSpecificFundInfo(user, res.data.account.id)
-    //     console.log('fund info res ', fundRes.data.fund_infos)
-    //     setFundInfoData([fundRes.data.fund_infos[0]])
-    //   } catch (error) {
-    //     msgAlert({
-    //       heading: 'Account failed to load',
-    //       message: error.message,
-    //       variant: 'danger'
-    //     })
-    //   }
-    // }
-    // fetchData()
   }, [])
 
   const handleDelete = async () => {
@@ -95,20 +76,21 @@ const Account = ({ user, msgAlert }) => {
   const handleSubmit = (event) => {
     event.preventDefault()
     const myPromise = new Promise((resolve, reject) => {
-      resolve(createFund(user, fund, account.id))
-      console.log('reject ', reject)
+      try {
+        resolve(createFund(user, fund, account.id))
+      } catch (err) {
+        reject(err)
+      }
     })
 
     myPromise
       .then(res => {
-        console.log('fund res ', res)
-        setFundInfo(prev => ({ ...prev, fund: res.data.fund.id, balance: (res.data.fund.price * prev.amount_owned) }))
-        console.log('fund info ', fundInfo)
-        return fundInfo
+        const newFundInfo = { ...fundInfo, fund: res.data.fund.id, balance: (res.data.fund.price * fundInfo.amount_owned) }
+        setFundInfo(prev => newFundInfo)
+        return newFundInfo
       })
-      .then((fundInfo) => createFundInfo(user, fundInfo))
+      .then((fundInfo) => createFundInfo(user, fundInfo)) // PROBLEM
       .then(res => {
-        console.log('fund info res ', res)
         setFundCreatedId(res.data.fund_info.id)
         msgAlert({
           heading: 'Fund Created',
@@ -118,48 +100,9 @@ const Account = ({ user, msgAlert }) => {
       })
 
       .catch(error => console.error(error))
-    // try {
-    //   const res = await createFund(user, fund, account.id)
-    //   console.log('fund res ', res.data.fund)
-    //   setCreatedId(res.data.fund.id)
-    //   setFundInfo(prev => ({ ...prev, fund: res.data.fund.id, balance: (res.data.fund.price * prev.amount_owned) }))
-
-    //   msgAlert({
-    //     heading: 'Fund Created',
-    //     message: `Created ${fund.type} successfully.`,
-    //     variant: 'success'
-    //   })
-    // } catch (error) {
-    //   msgAlert({
-    //     heading: 'Failed to create fund',
-    //     message: error.message,
-    //     variant: 'danger'
-    //   })
-    // }
-    // setTimeout(() => {
-    //   try {
-    //     console.log('fund info ', fundInfo)
-    //     const res = createFundInfo(user, fundInfo)
-    //     console.log('fund info res ', res)
-
-    //     msgAlert({
-    //       heading: 'Fund Info Created',
-    //       message: 'Created Fund Info successfully.',
-    //       variant: 'success'
-    //     })
-    //   } catch (error) {
-    //     msgAlert({
-    //       heading: 'Failed to create fund',
-    //       message: error.message,
-    //       variant: 'danger'
-    //     })
-    //   }
-    // }, 100)
-    // console.log(createFundInfo, setCreatedId)
   }
 
   if (fundInfoData) {
-    console.log('fund info data ', fundInfoData)
     mappedFunds = fundInfoData.map(fundInfo => {
       return (
         <li key={fundInfo.id}>
@@ -170,7 +113,6 @@ const Account = ({ user, msgAlert }) => {
       )
     })
   }
-  console.log('useless ', setBalance)
   if (!account) {
     return (
       <Spinner animation='border' role='status'>

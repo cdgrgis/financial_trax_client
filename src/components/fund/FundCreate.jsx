@@ -13,14 +13,11 @@ const FundCreate = ({ user, msgAlert }) => {
   })
   const [createdId, setCreatedId] = useState('')
 
-  console.log('fund data ', fund)
-
   const handleSubmit = async event => {
     event.preventDefault()
 
     try {
       const res = await createFund(user, fund)
-      console.log('res ', res.data.fund)
       setCreatedId(res.data.fund.id)
 
       msgAlert({

@@ -13,7 +13,6 @@ const Funds = ({ user, msgAlert }) => {
     const fetchData = async () => {
       try {
         const res = await indexFund(user)
-        console.log('res ', res.data)
         setFunds(res.data.funds)
       } catch (error) {
         msgAlert({
@@ -30,7 +29,6 @@ const Funds = ({ user, msgAlert }) => {
     setNavigateCreate(true)
   }
 
-  console.log('fund ', funds)
   let mappedFunds
   // If funds is null, funds is still loading
   if (!funds) {
@@ -49,7 +47,6 @@ const Funds = ({ user, msgAlert }) => {
         <Link to={`/funds/${fund.id}`}>{fund.company_name} - {fund.ticker_symbol} - {fund.price}</Link>
       </li>
     ))
-    console.log(setNavigateCreate)
     return (
       <>
         <div className='row'>
@@ -61,7 +58,6 @@ const Funds = ({ user, msgAlert }) => {
           </div>
         </div>
       </>
-
     )
   }
 }

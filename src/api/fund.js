@@ -18,7 +18,6 @@ export const showFund = (user, id) => {
 }
 
 export const createFund = (user, fund, id) => {
-  console.log('user ', user.token)
   return axios.post(apiUrl + '/funds/',
     { fund, account: id },
     {
@@ -29,7 +28,6 @@ export const createFund = (user, fund, id) => {
 }
 
 export const updateFund = (user, id, fund) => {
-  console.log('api fund ', fund)
   return axios.patch(apiUrl + `/funds/${id}/`,
     { fund },
     {

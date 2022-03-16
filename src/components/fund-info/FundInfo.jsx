@@ -23,13 +23,11 @@ const FundInfo = ({ user, msgAlert }) => {
 
     myPromise
       .then(res => {
-        console.log('res ', res.data.fund_info)
         setFundInfo(res.data.fund_info)
         return res.data.fund_info.fund.ticker_symbol
       })
       .then((tickerSymbol) => indexStockData(tickerSymbol))
       .then(res => {
-        console.log('stock data', res)
         setStockData(res.data)
         return res.data.close
       })
@@ -38,29 +36,12 @@ const FundInfo = ({ user, msgAlert }) => {
       })
       .then()
       .catch(error => {
-        console.log(error)
         msgAlert({
           heading: 'Fund Info failed to load',
           message: error.message,
           variant: 'danger'
         })
       })
-    // const fetchData = async () => {
-    //   try {
-    //     const res = await showFundInfo(user, id)
-    //     console.log('res ', res.data.fund_info)
-    //     setFundInfo(res.data.fund_info)
-    //     const stockRes = await indexStockData()
-    //     console.log('stockres', stockRes)
-    //   } catch (error) {
-    //     msgAlert({
-    //       heading: 'Fund failed to load',
-    //       message: error.message,
-    //       variant: 'danger'
-    //     })
-    //   }
-    // }
-    // fetchData()
   }, [])
 
   const handleDelete = async () => {
@@ -85,8 +66,6 @@ const FundInfo = ({ user, msgAlert }) => {
   } else if (deleted) {
     return <Navigate to={`/accounts/${fundInfo.account.id}/`} />
   } else {
-    console.log('fundInfo ', fundInfo)
-
     return (
       <>
         <div className='row'>

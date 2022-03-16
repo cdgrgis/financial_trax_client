@@ -15,7 +15,6 @@ const Accounts = ({ user, msgAlert }) => {
     const fetchData = async () => {
       try {
         const res = await indexAccount(user)
-        console.log('res ', res.data)
         setAccounts(res.data.accounts)
       } catch (error) {
         msgAlert({
@@ -31,8 +30,6 @@ const Accounts = ({ user, msgAlert }) => {
   const handleNavigateCreate = () => {
     setNavigateCreate(true)
   }
-
-  console.log('account ', accounts)
 
   // If accounts is null, accounts is still loading
   if (!accounts) {
