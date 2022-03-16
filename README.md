@@ -44,6 +44,7 @@ I begun with completing the routes for my user authentication and first resource
   
 # Wireframe
 ![Accounts View](https://user-images.githubusercontent.com/88337158/158496055-24d30e59-2e4e-4f6f-8b9d-3afeee89df4e.jpg)
+
 ![Account & Funds View](https://user-images.githubusercontent.com/88337158/158496053-0e66db8e-e7f2-49c1-bda1-0412f45179a9.jpg)
 
 
@@ -51,7 +52,9 @@ I begun with completing the routes for my user authentication and first resource
 
 # Links
 [Deployed Site](https://cdgrgis.github.io/financial_trax_client/)
+
 [API Repository](https://github.com/cdgrgis/financial_trax_api)
+
 [API](https://dashboard.heroku.com/apps/financial-trax-api)
 
 # ERD
